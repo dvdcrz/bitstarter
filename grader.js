@@ -126,12 +126,13 @@ var clone = function(fn) {
 
 };
 
-var prueba = function(result){
+var prueba = function(result, response){
     if(result instanceof Error){
-	console.log('error chavo');
+	console.log("%s does not exist. Exiting ",program.url );
+	process.exit(1);
 	}
     else {
-	console.log(result);
+	
 	var checkJson = checkHtmlFile(result, program.checks, true);
 	var outJson = JSON.stringify(checkJson, null, 4);
 	console.log(outJson);
@@ -150,7 +151,7 @@ if(require.main == module) {
     if(program.url){
 	rest.get(program.url).on('complete',prueba);
 
-	console.log(program.url); 
+	 
 	}
     else {
     var checkJson = checkHtmlFile(program.file, program.checks, false);
